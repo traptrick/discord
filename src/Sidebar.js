@@ -9,6 +9,9 @@ import {Avatar} from "@material-ui/core";
 import MicIcon from '@material-ui/icons/Mic';
 import HeadsetIcon from '@material-ui/icons/Headset';
 import SettingsIcon from '@material-ui/icons/Settings';
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 import SidebarChannel from './SidebarChannel';
 import { useSelector } from 'react-redux';
@@ -39,6 +42,16 @@ const Sidebar = () => {
         }
     }
 
+    const AvatarTooltip = withStyles((theme) => ({
+        tooltip: {
+          backgroundColor: '#f5f5f9',
+          color: 'rgba(0, 0, 0, 0.87)',
+          maxWidth: 220,
+          fontSize: theme.typography.pxToRem(12),
+          border: '1px solid #dadde9',
+        },
+      }))(Tooltip);
+
     return (
         <div className="sidebar">
             <div className="sidebar__top">
@@ -52,8 +65,11 @@ const Sidebar = () => {
                                 <ExpandMoreIcon />
                                 <h4>Text Channels</h4>
                         </div>
-
-                    <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
+                    
+                    <Tooltip title="Create New Channel">
+                        <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
+                    </Tooltip>
+                    
                 </div>
 
                 <div className="sidebar__channelsList">
@@ -79,7 +95,17 @@ const Sidebar = () => {
           </div>
 
             <div className="sidebar__profile">
-                <Avatar onClick={() => auth.signOut()} src={user.photo} style={{cursor: 'pointer'}}/>
+
+                <AvatarTooltip
+                    title={
+                        <>
+                        <Typography color="inherit">Click Here To <b>{'LOGOUT'}</b></Typography>
+                        </>
+                    }
+                >
+                    <Avatar onClick={() => auth.signOut()} src={user.photo} style={{cursor: 'pointer'}}/>
+                </AvatarTooltip>
+                
                 <div className="sidebar__profileInfo">
                     <h3>{user.displayName}</h3>
                     <p>#{user.uid.substring(0,5)}</p>
