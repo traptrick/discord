@@ -1,3 +1,13 @@
 .app{
   display: flex;
 }
+
+@media (max-width: 600px){
+  .app{
+    overflow: scroll;
+    font-size: 80%;
+  }
+  .app::-webkit-scrollbar{
+    display: none;
+  }
+}
