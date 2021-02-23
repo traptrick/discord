@@ -18,7 +18,15 @@
 
 .sidebar__channels{
     flex: 1;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
+
+.sidebar__channels::-webkit-scrollbar{
+    display: none;
+}
+
 .sidebar__addChannel{
     cursor: pointer;
 }
@@ -38,15 +46,6 @@
 .sidebar__header{
     display: flex;
     align-items: center;
-}
-
-.sidebar__channelsList{
-    overflow: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-.sidebar__channelsList::-webkit-scrollbar{
-    display: none;
 }
 
 .sidebar__voice,

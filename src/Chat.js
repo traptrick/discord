@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import ChatHeader from './ChatHeader'
 import Message from './Message'
 import './Chat.css'
@@ -20,14 +20,20 @@ const Chat = () => {
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
 
+    const messagesRef = useRef(null);
+
     useEffect(() => {
         if(channelId){
             db.collection('channels').doc(channelId).collection('messages').
-            orderBy('timestamp', 'desc').onSnapshot(snapshot=> {
+            orderBy('timestamp', 'asc').onSnapshot(snapshot=> {
                 setMessages(snapshot.docs.map((doc) => doc.data()))
             });
         }
     }, [channelId])
+
+    useEffect(() => {
+            messagesRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+      }, [messages]);
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -55,6 +61,7 @@ const Chat = () => {
                         user={message.user}
                     />
                 ))}
+                <div ref={messagesRef}></div>
             </div>
 
             <div className="chat__input">
