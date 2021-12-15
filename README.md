@@ -1,7 +1,5 @@
 # Discord-Clone
 
-### Project Link(deployed) :  https://discord-clone-traptrick.web.app/
-
 ###### I wanted to practice and polish my react skills, so i tried to build this Discord Clone. This react app is made using REDUX for state management and Firebase for Authentication and Database.
 ---  
 ##### Getting Started
